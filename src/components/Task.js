@@ -4,7 +4,9 @@ import Breakdown from './Breakdown';
 
 class Task extends React.Component {
 
-
+  componentWillMount(){
+    this.props.createBlank();
+  }
 
   componentDidMount(){
     console.log("component did mount!");
@@ -27,18 +29,28 @@ class Task extends React.Component {
     }
 
     addEdit(id){
+      //If this is a new task, we want to create a new task
       if(id === undefined){
         console.log("add new recipe");
-        
-        }
+        this.props.addTask(id, () => {
+          
+        });
+       }
+      //If this task already exists.  We want to update that existing task.
       else{
-        console.log('update recipe');
-    
-        };
+        this.props.updateTask(id, () => {
+        });
+      }
     }
 
-
   render(){
+    console.log('render');
+
+  
+    var breakdowns = this.props.cur_task.breakdown || [];
+    console.log(this.props.cur_task.breakdown);
+    console.log(breakdowns);
+
     return(
       <div>
        <br/>
@@ -52,7 +64,11 @@ class Task extends React.Component {
        <br/>
        Breakdown:
        <br/>
-       <Breakdown taskChange={this.props.taskChange} task={this.props.cur_task}/>
+       {
+         breakdowns.map((breakdown, idx) =>
+         <Breakdown breakdown={breakdown} key={idx} id={idx} taskChange={this.props.taskChange} task={this.props.cur_task} appendInput={this.props.appendInput}/> , this)
+       }
+      
        <br/>
        # of Openings:
        <br/>

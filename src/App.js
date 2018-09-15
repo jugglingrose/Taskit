@@ -24,7 +24,7 @@ class App extends React.Component {
         id: "test",
         name: "event name",
         desc: "this is a desc",
-        breakdown: "this is a breakdown",
+        breakdown: ["this is a breakdown"],
         number_of_openings: 3 ,
         priority: "urgent",
       },
@@ -37,8 +37,31 @@ class App extends React.Component {
   }
 
   updateTask = () => {
-    console.log("update task");
+    console.log("update task called");
   }
+
+  createBlank = () => {
+    console.log("blank recipe called");
+    const blank = {
+      id: '',
+      name: '',
+      desc: '',
+      breakdown: [""],
+      number_of_openings: [ ""],
+      priority: '',
+    }
+    this.setState({cur_recipe: blank});
+  }
+
+  appendInput = (fieldname) => {
+    console.log('append input called');
+    const cur_task = {...this.state.cur_task};
+    const newInput = [""];
+    const InputArray = cur_task[fieldname].concat(newInput);
+    cur_task[fieldname] = InputArray;
+    this.setState({cur_task : cur_task});
+  }
+
   eventChange = (fieldName) => (e) => {
     const value = e.target.value;
     const cur_event = {...this.state.cur_event};
@@ -46,10 +69,16 @@ class App extends React.Component {
     this.setState({ cur_event: cur_event});
   }
 
-  taskChange = (fieldName) => (e) => {
+  taskChange = (fieldName, id) => (e) => {
     const value = e.target.value;
+    // ['lask', 'asldkje', ]
+    // value = k
     const cur_task = {...this.state.cur_task};
-    cur_task[fieldName] = value;
+    cur_task[fieldName].id = cur_task.breakdown.push(value);
+    console.log(fieldName);
+    console.log(cur_task[fieldName].id);
+    console.log(cur_task.breakdown.id);
+    //console.log(cur_task.breakdown.push(value));
     this.setState({ cur_task : cur_task});
   }
 
@@ -62,8 +91,10 @@ class App extends React.Component {
         <Switch>
           <Route exact path = "/" render={(props) => (<TaskListOrganizer />)} />
           <Route exact path = "/createevent" render={(props) => (<CreateEvent {...props} eventChange={this.eventChange} />)}/>)} />
-          <Route exact path = "/add" render={(props) => (<Task {...props} taskChange={this.taskChange}/>)} />
-          <Route exact path = "/edit" render={(props) => (<Task {...props} taskChange={this.taskChange} cur_task={this.state.cur_task} />)} />
+          <Route exact path = "/add" render={(props) => (<Task {...props} taskChange={this.taskChange} cur_task={this.state.cur_task} 
+          updateTask={this.updateTask} appendInput={this.appendInput} createBlank={this.createBlank} />)} />
+          <Route exact path = "/edit" render={(props) => (<Task {...props} taskChange={this.taskChange} cur_task={this.state.cur_task} 
+          addTask={this.addTask} appendInput={this.appendInput} createBlank={this.createBlank} />)} />
         </Switch>
       </div>
     );
