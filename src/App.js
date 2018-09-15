@@ -22,14 +22,23 @@ class App extends React.Component {
       event: {},
       cur_task:{
         id: "test",
+        name: "event name",
         desc: "this is a desc",
         breakdown: "this is a breakdown",
-        number_of_openings: 3 
+        number_of_openings: 3 ,
+        priority: "urgent",
       },
       task: {},
     }
   }
 
+  addTask = () => {
+    console.log("add task called");
+  }
+
+  updateTask = () => {
+    console.log("update task");
+  }
   eventChange = (fieldName) => (e) => {
     const value = e.target.value;
     const cur_event = {...this.state.cur_event};
@@ -39,9 +48,9 @@ class App extends React.Component {
 
   taskChange = (fieldName) => (e) => {
     const value = e.target.value;
-    const task = {...this.state.task};
-    task[fieldName] = value;
-    this.setState({ task : task});
+    const cur_task = {...this.state.cur_task};
+    cur_task[fieldName] = value;
+    this.setState({ cur_task : cur_task});
   }
 
 
