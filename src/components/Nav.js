@@ -3,9 +3,13 @@ import React from 'react';
 class Nav extends React.Component {
   render(){
     return(
-      <div>
-       Nav
-      </div>
+      <nav class="topNav">
+        
+        <div class="navCenter">
+          <h1>TaskIt</h1>
+        </div>
+      
+      </nav>
       
       
     )
