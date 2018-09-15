@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Nav from './components/Nav'; 
 import Sidebar from './components/Sidebar';
@@ -23,8 +23,6 @@ class App extends React.Component {
           <Route exact path = "/add" render={(props) => (<Task/>)} />
           <Route exact path = "/edit" render={(props) => (<Task/>)} />
         </Switch>
-    
-
       </div>
     );
   }
