@@ -1,13 +1,13 @@
 
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-
+//import './App.css';
 import Nav from './components/Nav'; 
 import Sidebar from './components/Sidebar';
 import CreateEvent from './components/CreateEvent';
 import Task from './components/Task';
 import TaskListOrganizer from './components/TaskListOrganizer';
-import './App.css';
+
 
 class App extends React.Component {
 
@@ -105,7 +105,6 @@ class App extends React.Component {
     this.setState({ cur_task : cur_task});
   }
 
-
   render() {
     return (
       <div>
@@ -117,7 +116,7 @@ class App extends React.Component {
           <Route exact path = "/add" render={(props) => (<Task {...props} taskChange={this.taskChange} cur_task={this.state.cur_task} 
           updateTask={this.updateTask} appendInput={this.appendInput} createBlank={this.createBlank} loadRecipe={this.loadRecipe} />)} />
           <Route exact path = "/edit/:id" render={(props) => (<Task {...props} taskChange={this.taskChange} cur_task={this.state.cur_task} 
-          addTask={this.addTask} appendInput={this.appendInput} createBlank={this.createBlank} loadRecipe={this.loadRecipe}  />)} />
+          addTask={this.addTask} appendInput={this.appendInput} createBlank={this.createBlank}  updateTask={this.updateTask} loadRecipe={this.loadRecipe}  />)} />
         </Switch>
       </div>
     );

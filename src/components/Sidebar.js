@@ -3,24 +3,24 @@ import React from 'react';
 class Sidebar extends React.Component{
   render(){
     return(
-      <div class="container">
-        <div class="side-bar-left">
-            <div class="side-bar-left-top">
-                <a href="#" class="add-event">Add event</a> 
-                <a href="#" class="upcomming">upcomming events</a> 
-                <a href="#" class="past">past events</a> 
-                <a href="#" class="timline"> timeline</a>
-                <a href="#" class="profile">profile</a> 
+      <div className="container">
+        <div className="side-bar-left">
+            <div className="side-bar-left-top">
+                <a href="#" className="add-event">Add event</a> 
+                <a href="#" className="upcomming">upcomming events</a> 
+                <a href="#" className="past">past events</a> 
+                <a href="#" className="timline"> timeline</a>
+                <a href="#" className="profile">profile</a> 
             </div>
-            <div class="side-bar-left-bottom">
-                <a href="#" class="seetings">settings</a> 
-                <a href="#" class="contact">contact-us</a> 
-                <a href="#" class="terms">terms</a> 
+            <div className="side-bar-left-bottom">
+                <a href="#" className="seetings">settings</a> 
+                <a href="#" className="contact">contact-us</a> 
+                <a href="#" className="terms">terms</a> 
             </div>
         </div>
-        <div class="content-window">
+      <div className="content-window">
 
-        </div>
+    </div>
     </div>
     )
   }
