@@ -6,8 +6,6 @@ class TaskDetails extends React.Component {
       <div>
        This component is where the volunteer can see task details
       </div>
-      
-      
     )
   }
 }

@@ -72,7 +72,7 @@ class Task extends React.Component {
         ): (
           <button onClick={() => {this.addEdit(this.props.cur_task.id)}}>Add</button>
         )}       
-   
+  
      </div>  
 
     )

@@ -7,6 +7,7 @@ import Sidebar from './components/Sidebar';
 import CreateEvent from './components/CreateEvent';
 import Task from './components/Task';
 import TaskListOrganizer from './components/TaskListOrganizer';
+import VolunteerTaskList from './components/VolunteerTaskList';
 
 
 class App extends React.Component {
@@ -117,6 +118,7 @@ class App extends React.Component {
           updateTask={this.updateTask} appendInput={this.appendInput} createBlank={this.createBlank} loadRecipe={this.loadRecipe} />)} />
           <Route exact path = "/edit/:id" render={(props) => (<Task {...props} taskChange={this.taskChange} cur_task={this.state.cur_task} 
           addTask={this.addTask} appendInput={this.appendInput} createBlank={this.createBlank}  updateTask={this.updateTask} loadRecipe={this.loadRecipe}  />)} />
+          <Route exact path = "/volunteer" render={(props) => (<VolunteerTaskList {...props} cur_event={this.state.cur_event} /> )} /> 
         </Switch>
       </div>
     );
@@ -124,4 +126,3 @@ class App extends React.Component {
 }
 
 export default App;
-

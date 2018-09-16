@@ -7,7 +7,6 @@ class TaskSelect extends React.Component {
        This component is where the volunteer will select their task
       </div>
       
-      
     )
   }
 }
