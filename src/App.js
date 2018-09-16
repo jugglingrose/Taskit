@@ -18,17 +18,33 @@ class App extends React.Component {
 
     this.state={
       user: {},
-      cur_event: {},
-      event: {},
+      cur_event: {
+        id: "event",
+        name: "event",
+        date: 12,
+        location: "event",
+        tasks: [{id: "foo",
+        name: "foo",
+        desc: "this is a desc",
+        breakdown: ["this is a breakdown"],
+        number_of_openings: 3 ,
+        priority: "urgent"}, 
+        {id: "bar",
+        name: "bar",
+        desc: "this is a desc",
+        breakdown: ["this is a breakdown"],
+        number_of_openings: 3 ,
+        priority: "urgent"}],
+      },
       cur_task:{
         id: "test",
-        name: "event name",
+        name: "name",
         desc: "this is a desc",
         breakdown: ["this is a breakdown"],
         number_of_openings: 3 ,
         priority: "urgent",
       },
-      task: {},
+      tasks: [{"task1":"clean floors","task2":"wash dishes"}],
     }
   }
 
@@ -77,7 +93,6 @@ class App extends React.Component {
     console.log(fieldName);
     console.log(cur_task[fieldName].id);
     console.log(cur_task.breakdown.id);
- 
     this.setState({ cur_task : cur_task});
   }
 
@@ -88,7 +103,7 @@ class App extends React.Component {
         <Nav/>
         <Sidebar/>
         <Switch>
-          <Route exact path = "/" render={(props) => (<TaskListOrganizer />)} />
+          <Route exact path = "/" render={(props) => (<TaskListOrganizer {...props} cur_event={this.state.cur_event} />)} />
           <Route exact path = "/createevent" render={(props) => (<CreateEvent {...props} eventChange={this.eventChange} />)}/>)} />
           <Route exact path = "/add" render={(props) => (<Task {...props} taskChange={this.taskChange} cur_task={this.state.cur_task} 
           updateTask={this.updateTask} appendInput={this.appendInput} createBlank={this.createBlank} />)} />
