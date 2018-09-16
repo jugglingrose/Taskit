@@ -9,7 +9,7 @@ class TaskListOrganizer extends React.Component {
       <div>
        <h2>Task List</h2>
        {
-         tasks.map((task) => <IndividualTask/> )
+         tasks.map((task, id) => <IndividualTask id={id} details={this.props.cur_event.tasks[id]} /> )
        }
       
       </div>
