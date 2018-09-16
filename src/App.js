@@ -71,14 +71,13 @@ class App extends React.Component {
 
   taskChange = (fieldName, id) => (e) => {
     const value = e.target.value;
-    // ['lask', 'asldkje', ]
-    // value = k
+   
     const cur_task = {...this.state.cur_task};
-    cur_task[fieldName].id = cur_task.breakdown.push(value);
+    cur_task[fieldName][id] = value;
     console.log(fieldName);
     console.log(cur_task[fieldName].id);
     console.log(cur_task.breakdown.id);
-    //console.log(cur_task.breakdown.push(value));
+ 
     this.setState({ cur_task : cur_task});
   }
 
