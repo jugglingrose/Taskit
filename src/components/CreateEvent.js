@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 /* This is the component where the organizer will create an event */
 
@@ -17,7 +18,9 @@ class CreateEvent extends React.Component {
        Location:
        <br/>
        <input name="location" placeholder="Capitol Factory" onChange={this.props.eventChange("location")}></input>
+       <Link to='/add'><button>Add Task</button></Link>
       </div>
+      
       
       
     )

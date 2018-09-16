@@ -7,8 +7,6 @@ import Sidebar from './components/Sidebar';
 import CreateEvent from './components/CreateEvent';
 import Task from './components/Task';
 import TaskListOrganizer from './components/TaskListOrganizer';
-
-
 import './App.css';
 
 class App extends React.Component {
@@ -24,13 +22,13 @@ class App extends React.Component {
         date: 12,
         location: "event",
         tasks: [{id: "foo",
-        name: "foo",
+        name: "set up the booth",
         desc: "this is a desc",
         breakdown: ["this is a breakdown"],
         number_of_openings: 3 ,
         priority: "urgent"}, 
         {id: "bar",
-        name: "bar",
+        name: "sweep the floor",
         desc: "this is a desc",
         breakdown: ["this is a breakdown"],
         number_of_openings: 3 ,
@@ -44,16 +42,23 @@ class App extends React.Component {
         number_of_openings: 3 ,
         priority: "urgent",
       },
-      tasks: [{"task1":"clean floors","task2":"wash dishes"}],
+  
     }
   }
 
   addTask = () => {
     console.log("add task called");
+    /* here we will do a fetch to add a new task */
   }
 
   updateTask = () => {
     console.log("update task called");
+    /* here we will do a fetch to update an existing task*/
+  }
+
+  delete = (id) => {
+    console.log("delete called");
+    /* here we will do a fetch to delete an existing task*/
   }
 
   createBlank = () => {
@@ -67,6 +72,11 @@ class App extends React.Component {
       priority: '',
     }
     this.setState({cur_recipe: blank});
+  }
+
+  loadRecipe = (id) => {
+    console.log('load recipe called');
+    /* here we do a fetch to set our cur_task based on the id we receive*/
   }
 
   appendInput = (fieldname) => {
@@ -87,7 +97,6 @@ class App extends React.Component {
 
   taskChange = (fieldName, id) => (e) => {
     const value = e.target.value;
-   
     const cur_task = {...this.state.cur_task};
     cur_task[fieldName][id] = value;
     console.log(fieldName);
@@ -103,12 +112,12 @@ class App extends React.Component {
         <Nav/>
         <Sidebar/>
         <Switch>
-          <Route exact path = "/" render={(props) => (<TaskListOrganizer {...props} cur_event={this.state.cur_event} />)} />
+          <Route exact path = "/" render={(props) => (<TaskListOrganizer {...props} cur_event={this.state.cur_event} delete={this.delete} />)} />
           <Route exact path = "/createevent" render={(props) => (<CreateEvent {...props} eventChange={this.eventChange} />)}/>)} />
           <Route exact path = "/add" render={(props) => (<Task {...props} taskChange={this.taskChange} cur_task={this.state.cur_task} 
-          updateTask={this.updateTask} appendInput={this.appendInput} createBlank={this.createBlank} />)} />
-          <Route exact path = "/edit" render={(props) => (<Task {...props} taskChange={this.taskChange} cur_task={this.state.cur_task} 
-          addTask={this.addTask} appendInput={this.appendInput} createBlank={this.createBlank} />)} />
+          updateTask={this.updateTask} appendInput={this.appendInput} createBlank={this.createBlank} loadRecipe={this.loadRecipe} />)} />
+          <Route exact path = "/edit/:id" render={(props) => (<Task {...props} taskChange={this.taskChange} cur_task={this.state.cur_task} 
+          addTask={this.addTask} appendInput={this.appendInput} createBlank={this.createBlank} loadRecipe={this.loadRecipe}  />)} />
         </Switch>
       </div>
     );

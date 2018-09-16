@@ -8,23 +8,16 @@ class Task extends React.Component {
     this.props.createBlank();
   }
 
-  componentDidMount(){
-    console.log("component did mount!");
-    //
-    //Change this to params at a later time instead of cur_task.id//
-    //
+  componentDidMount(){   
     var id = this.props.cur_task.id;
-    console.log("this is the id: " + id);
-
     if(id === undefined){
-      console.log("edit page: recipe is undefined");
-      /*we create blank recipe to load an empty form so user can then create a
-      new recipe*/
-      //this.props.createBlank();
+      console.log("add: recipe is undefined");
+      this.props.createBlank();
     }
     else{
-        console.log("edit page: recipe is defined");
-        //this.props.loadRecipe(id);
+        console.log("edit: recipe is defined");
+         /* once we have our backend set up.  This will set our cur_task based on the params id.  From here we can edit the task */
+        this.props.loadRecipe(this.props.match.params.id);
       }
     }
 
@@ -44,11 +37,7 @@ class Task extends React.Component {
     }
 
   render(){
-    console.log('render');
-
-  
     var breakdowns = this.props.cur_task.breakdown || [];
-    console.log(this.props.cur_task.breakdown);
     console.log(breakdowns);
 
     return(
