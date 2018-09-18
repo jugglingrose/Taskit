@@ -1,5 +1,6 @@
 import React from 'react';
 import IndividualTask from './IndividualTask';
+import { Link } from 'react-router-dom';
 
 /* This component is where the Organizer can view the event details plus they can manage the tasks
 associated with the event. */
@@ -22,6 +23,7 @@ class TaskListOrganizer extends React.Component {
           {
             tasks.map((task, idx) => <IndividualTask key={idx} idx={idx} delete={this.props.delete} details={this.props.events[id].tasks[idx]} /> )
           }
+        <Link to="/add"><button>Add Task</button></Link>
       </div>   
     )
   }

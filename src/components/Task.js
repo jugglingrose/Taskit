@@ -6,7 +6,6 @@ import Breakdown from './Breakdown';
 class Task extends React.Component {
 
   componentWillMount(){ 
-  
   }
 
   componentDidMount(){   
@@ -20,7 +19,6 @@ class Task extends React.Component {
     else{
         console.log("edit: recipe is defined. Edit task");
         this.props.loadCurTask(this.props.match.params.id);  
-     
       }
   }
 
@@ -32,9 +30,8 @@ class Task extends React.Component {
       //If this is a new task, we want to create a new task
       console.log(this.props.match.params.id);
       if(id === undefined){
-        console.log("add new recipe");
-        this.props.addTask(id, () => {
-        });
+         
+        this.props.addTask();
        }
       //If this task already exists.  We want to update that existing task.
       else{
@@ -78,7 +75,7 @@ class Task extends React.Component {
         <br/>
         <input value={this.props.cur_task.priority} onChange={this.props.taskChange("priority")}></input>
         <br/>
-        { this.props.cur_task.id ? (
+        { this.props.match.params.id ? (
           <button onClick={() => {this.addEdit(this.props.match.params.id)}}>Edit</button>
         ): (
           <button onClick={() => {this.addEdit()}}>Add</button>

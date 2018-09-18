@@ -9,9 +9,13 @@ class IndividualEvent extends React.Component{
   render() {
     console.log(this.props.id);
     return(
-      <Link to={"/event/" + this.props.id }>
-        <p>{this.props.details.name}</p>
-      </Link>
+      <div>
+        <Link to={"/event/" + this.props.id }>
+          <p>{this.props.details.name}</p>
+        </Link>
+        <button><i class="fa fa-pencil"></i></button>
+        <button><i class="fa fa-trash"></i></button>
+      </div>
     )
   }
 }
