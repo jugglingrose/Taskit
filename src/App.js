@@ -8,33 +8,53 @@ import CreateEvent from './components/CreateEvent';
 import Task from './components/Task';
 import TaskListOrganizer from './components/TaskListOrganizer';
 import VolunteerTaskList from './components/VolunteerTaskList';
+import EventList from './components/EventList';
 
 
 class App extends React.Component {
 
   constructor() {
     super();
-
     this.state={
-      user: {},
-      cur_event: {
-        id: "event",
-        name: "event",
-        date: 12,
-        location: "event",
-        tasks: [{id: "foo",
-        name: "set up the booth",
-        desc: "this is a desc",
-        breakdown: ["this is a breakdown"],
-        number_of_openings: 3 ,
-        priority: "urgent"}, 
-        {id: "bar",
-        name: "sweep the floor",
-        desc: "this is a desc",
-        breakdown: ["this is a breakdown"],
-        number_of_openings: 3 ,
-        priority: "urgent"}],
-      },
+      events: [
+        {
+          id: "eventOne",
+          name: "First Event",
+          date: 12,
+          location: "event",
+          tasks: [{id: "foo",
+          name: "set up the booth",
+          desc: "this is a desc",
+          breakdown: ["this is a breakdown"],
+          number_of_openings: 3 ,
+          priority: "urgent"}, 
+          {id: "bar",
+          name: "sweep the floor",
+          desc: "this is a desc",
+          breakdown: ["this is a breakdown"],
+          number_of_openings: 3 ,
+          priority: "urgent"}],
+        },
+        {
+          id: "eventTwo",
+          name: "Second Event",
+          date: 12,
+          location: "event",
+          tasks: [{id: "bash",
+          name: "Throw out the trash",
+          desc: "this is a desc",
+          breakdown: ["this is a breakdown"],
+          number_of_openings: 3 ,
+          priority: "urgent"}, 
+          {id: "blah",
+          name: "Sign in guests",
+          desc: "this is a desc",
+          breakdown: ["this is a breakdown"],
+          number_of_openings: 3 ,
+          priority: "urgent"}],
+        }  
+      ],
+      cur_event: { },
       cur_task:{
         id: "test",
         name: "name",
@@ -43,7 +63,6 @@ class App extends React.Component {
         number_of_openings: 3 ,
         priority: "urgent",
       },
-  
     }
   }
 
@@ -73,6 +92,16 @@ class App extends React.Component {
       priority: '',
     }
     this.setState({cur_recipe: blank});
+  }
+
+  loadCurEvent = (id) => {
+    /*here we load our cur_event*/
+    console.log("loading our current event into state" + id);
+    const cur_event = {...this.state.cur_event};
+    const data = this.state.events[id];
+    console.log('data' + data);
+    this.setState({ cur_event : cur_event });
+
   }
 
   loadRecipe = (id) => {
@@ -112,7 +141,8 @@ class App extends React.Component {
         <Nav/>
         <Sidebar/>
         <Switch>
-          <Route exact path = "/" render={(props) => (<TaskListOrganizer {...props} cur_event={this.state.cur_event} delete={this.delete} />)} />
+          <Route exact path = "/" render={(props) => (<EventList {...props} events={this.state.events} /> )} /> 
+          <Route exact path = "/event/:id" render={(props) => (<TaskListOrganizer {...props} events={this.state.events} cur_event={this.state.cur_event} delete={this.delete} loadCurEvent={this.loadCurEvent} />)} />
           <Route exact path = "/createevent" render={(props) => (<CreateEvent {...props} eventChange={this.eventChange} />)}/>)} />
           <Route exact path = "/add" render={(props) => (<Task {...props} taskChange={this.taskChange} cur_task={this.state.cur_task} 
           updateTask={this.updateTask} appendInput={this.appendInput} createBlank={this.createBlank} loadRecipe={this.loadRecipe} />)} />

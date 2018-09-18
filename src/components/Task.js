@@ -1,5 +1,6 @@
 import React from 'react';
 import Breakdown from './Breakdown';
+
 /*This component is where the organizer will add and edit tasks*/
 
 class Task extends React.Component {
@@ -10,6 +11,8 @@ class Task extends React.Component {
 
   componentDidMount(){   
     var id = this.props.cur_task.id;
+    //var id = this.props.match.params.id;
+
     if(id === undefined){
       console.log("add: recipe is undefined");
       this.props.createBlank();
