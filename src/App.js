@@ -64,9 +64,15 @@ class App extends React.Component {
     /* here we will do a fetch to add a new task */
   }
 
-  updateTask = () => {
-    console.log("update task called");
+  updateTask = (id) => {
     /* here we will do a fetch to update an existing task*/
+    console.log("update task called", id);
+    console.log(this.state.cur_task);
+    console.log(this.state.cur_event);
+    const cur_task = {...this.state.cur_task};
+    const cur_event = {...this.state.cur_event};
+    cur_event.tasks[id] = cur_task;
+    this.setState({cur_event: cur_event});
   }
 
   delete = (id) => {
@@ -145,7 +151,7 @@ class App extends React.Component {
           <Route exact path = "/add" render={(props) => (<Task {...props}  taskChange={this.taskChange} cur_task={this.state.cur_task} 
           updateTask={this.updateTask} appendInput={this.appendInput} createBlank={this.createBlank} loadRecipe={this.loadRecipe} />)} />
           <Route exact path = "/edit/:id" render={(props) => (<Task {...props} loadCurTask={this.loadCurTask} arrayChange={this.arrayChange} taskChange={this.taskChange} cur_task={this.state.cur_task} 
-          addTask={this.addTask} appendInput={this.appendInput} createBlank={this.createBlank}  updateTask={this.updateTask} loadRecipe={this.loadRecipe}  />)} />
+          addTask={this.addTask} appendInput={this.appendInput} createBlank={this.createBlank}  updateTask={this.updateTask} loadRecipe={this.loadRecipe} cur_event={this.state.cur_event} />)} />
           <Route exact path = "/volunteer" render={(props) => (<VolunteerTaskList {...props} cur_event={this.state.cur_event} /> )} /> 
         </Switch>
       </div>
