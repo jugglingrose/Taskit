@@ -12,9 +12,10 @@ class Breakdown extends React.Component{
   }
 
   render() {
+    console.log(this.props.id);
     return(
       <div>
-        <input value={this.props.breakdown} onKeyDown={this.keyPress} onChange={this.props.taskChange("breakdown", this.props.id)}></input>
+        <input value={this.props.breakdown} onKeyDown={this.keyPress} onChange={this.props.arrayChange("breakdown", this.props.id)}></input>
       </div>
     )
   }

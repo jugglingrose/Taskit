@@ -6,14 +6,10 @@ import Breakdown from './Breakdown';
 class Task extends React.Component {
 
   componentWillMount(){
-    this.props.createBlank();
-    //this.props.loadCurTask(this.props.match.params.id);
-   
-      
+    
   }
 
   componentDidMount(){   
-    console.log('component did mount');
     var id = this.props.match.params.id;
 
     if(id === undefined){
@@ -42,27 +38,26 @@ class Task extends React.Component {
     }
 
   render(){
-    console.log("page rendering");
-    var breakdowns = this.props.cur_task.breakdown || [];
-    console.log(breakdowns);
-    
+
+    var breakdown = this.props.cur_task.breakdown || [];
+    console.log("this is breakdown" , this.props.cur_task.breakdown);
 
     return(
       <div>
         <br/>
         Task:
         <br/>
-        <input value={this.props.cur_task.name} title="Task" onChange={this.props.taskChange("task_name")}></input>
+        <input value={this.props.cur_task.name} title="Task" onChange={this.props.taskChange("name")}></input>
         <br/>
         Description:
         <br/>
-        <input value={this.props.cur_task.desc} title="Description" onChange={this.props.taskChange("description")}></input>
+        <input value={this.props.cur_task.desc} title="Description" onChange={this.props.taskChange("desc")}></input>
         <br/>
         Breakdown:
         <br/>
         {
-          breakdowns.map((breakdown, idx) =>
-          <Breakdown breakdown={breakdown} key={idx} id={idx} taskChange={this.props.taskChange} task={this.props.cur_task} appendInput={this.props.appendInput}/> , this)
+          breakdown.map((item, idx) =>
+          <Breakdown breakdown={item} key={idx} id={idx} arrayChange={this.props.arrayChange} task={this.props.cur_task} appendInput={this.props.appendInput}/> , this)
         }
       
         <br/>

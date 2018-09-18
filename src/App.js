@@ -126,6 +126,13 @@ class App extends React.Component {
     this.setState({ cur_task : cur_task});
   }
 
+    arrayChange = (fieldName, id) => (e) => {
+      console.log('array change');
+      const value = e.target.value;
+      const cur_task = {...this.state.cur_task};
+      cur_task[fieldName][id] = value;
+      this.setState({cur_task : cur_task});
+    }
   render() {
     return (
       <div>
@@ -137,7 +144,7 @@ class App extends React.Component {
           <Route exact path = "/createevent" render={(props) => (<CreateEvent {...props} eventChange={this.eventChange} />)}/>)} />
           <Route exact path = "/add" render={(props) => (<Task {...props}  taskChange={this.taskChange} cur_task={this.state.cur_task} 
           updateTask={this.updateTask} appendInput={this.appendInput} createBlank={this.createBlank} loadRecipe={this.loadRecipe} />)} />
-          <Route exact path = "/edit/:id" render={(props) => (<Task {...props} loadCurTask={this.loadCurTask} taskChange={this.taskChange} cur_task={this.state.cur_task} 
+          <Route exact path = "/edit/:id" render={(props) => (<Task {...props} loadCurTask={this.loadCurTask} arrayChange={this.arrayChange} taskChange={this.taskChange} cur_task={this.state.cur_task} 
           addTask={this.addTask} appendInput={this.appendInput} createBlank={this.createBlank}  updateTask={this.updateTask} loadRecipe={this.loadRecipe}  />)} />
           <Route exact path = "/volunteer" render={(props) => (<VolunteerTaskList {...props} cur_event={this.state.cur_event} /> )} /> 
         </Switch>
