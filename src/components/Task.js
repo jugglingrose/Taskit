@@ -7,22 +7,24 @@ class Task extends React.Component {
 
   componentWillMount(){
     this.props.createBlank();
+    //this.props.loadCurTask(this.props.match.params.id);
+   
+      
   }
 
   componentDidMount(){   
-    var id = this.props.cur_task.id;
-    //var id = this.props.match.params.id;
+    console.log('component did mount');
+    var id = this.props.match.params.id;
 
     if(id === undefined){
-      console.log("add: recipe is undefined");
+      console.log("recipe is undefined.  Add Task");
       this.props.createBlank();
     }
     else{
-        console.log("edit: recipe is defined");
-         /* once we have our backend set up.  This will set our cur_task based on the params id.  From here we can edit the task */
-        this.props.loadRecipe(this.props.match.params.id);
+        console.log("edit: recipe is defined. Edit task");
+        this.props.loadCurTask(this.props.match.params.id);  
       }
-    }
+  }
 
     addEdit(id){
       //If this is a new task, we want to create a new task
@@ -40,8 +42,10 @@ class Task extends React.Component {
     }
 
   render(){
+    console.log("page rendering");
     var breakdowns = this.props.cur_task.breakdown || [];
     console.log(breakdowns);
+    
 
     return(
       <div>
@@ -71,7 +75,7 @@ class Task extends React.Component {
         <input value={this.props.cur_task.priority} onChange={this.props.taskChange("priority")}></input>
         <br/>
         { this.props.cur_task.id ? (
-          <button onClick={() => {this.addEdit(this.props.cur_task.id)}} >Edit</button>
+          <button onClick={() => {this.addEdit(this.props.cur_task)}} >Edit</button>
         ): (
           <button onClick={() => {this.addEdit(this.props.cur_task.id)}}>Add</button>
         )}       

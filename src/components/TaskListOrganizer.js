@@ -19,7 +19,7 @@ class TaskListOrganizer extends React.Component {
       <h2>{this.props.events[id].location}</h2>
       <h3>Task List</h3>
         {
-          tasks.map((task, idx) => <IndividualTask key={id} id={id} details={this.props.events[id].tasks[idx]} /> )
+          tasks.map((task, idx) => <IndividualTask key={idx} id={idx} details={this.props.events[id].tasks[idx]} /> )
         }
 
      

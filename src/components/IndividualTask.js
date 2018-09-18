@@ -6,9 +6,10 @@ import { Link } from 'react-router-dom';
 class IndividualTask extends React.Component{
 
   render(){
-    console.log("test" + this.props.details);
-    console.log("id: " + this.props.id);
+    console.log("individual task id:", this.props.id);
+
     return(
+
       <div>
         <p>{this.props.details.name}</p>
         <Link to={"/edit/" + this.props.id}>

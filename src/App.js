@@ -20,49 +20,42 @@ class App extends React.Component {
         {
           id: "eventOne",
           name: "First Event",
-          date: 12,
-          location: "event",
+          date: "October",
+          location: "Austin",
           tasks: [{id: "foo",
           name: "set up the booth",
-          desc: "this is a desc",
-          breakdown: ["this is a breakdown"],
+          desc: "set up booth",
+          breakdown: ["set up table", "place a cover", "2 chairs"],
           number_of_openings: 3 ,
-          priority: "urgent"}, 
+          priority: "important"}, 
           {id: "bar",
           name: "sweep the floor",
-          desc: "this is a desc",
-          breakdown: ["this is a breakdown"],
+          desc: "sweep the stadium",
+          breakdown: ["sweep", "put away broom"],
           number_of_openings: 3 ,
           priority: "urgent"}],
         },
         {
           id: "eventTwo",
           name: "Second Event",
-          date: 12,
-          location: "event",
+          date: "November",
+          location: "Dallas",
           tasks: [{id: "bash",
           name: "Throw out the trash",
-          desc: "this is a desc",
-          breakdown: ["this is a breakdown"],
+          desc: "Take out the trash after the event",
+          breakdown: ["Grab bags from cabinet", "place garbage in bins outside", "separate recyclables"],
           number_of_openings: 3 ,
-          priority: "urgent"}, 
+          priority: "important"}, 
           {id: "blah",
           name: "Sign in guests",
           desc: "this is a desc",
-          breakdown: ["this is a breakdown"],
+          breakdown: ["set up guest list", "sign in guests as they arrive"],
           number_of_openings: 3 ,
           priority: "urgent"}],
         }  
       ],
       cur_event: { },
-      cur_task:{
-        id: "test",
-        name: "name",
-        desc: "this is a desc",
-        breakdown: ["this is a breakdown"],
-        number_of_openings: 3 ,
-        priority: "urgent",
-      },
+      cur_task:{ },
     }
   }
 
@@ -96,12 +89,13 @@ class App extends React.Component {
 
   loadCurEvent = (id) => {
     /*here we load our cur_event*/
-    console.log("loading our current event into state" + id);
     const cur_event = {...this.state.cur_event};
-    const data = this.state.events[id];
-    console.log('data' + data);
-    this.setState({ cur_event : cur_event });
+    this.setState({ cur_event : this.state.events[id]});
+  }
 
+  loadCurTask = (id) => {
+    const cur_task = {...this.state.cur_task};
+    this.setState({ cur_task : this.state.cur_event.tasks[id]});
   }
 
   loadRecipe = (id) => {
@@ -125,13 +119,10 @@ class App extends React.Component {
     this.setState({ cur_event: cur_event});
   }
 
-  taskChange = (fieldName, id) => (e) => {
+  taskChange = (fieldName) => (e) => {
     const value = e.target.value;
     const cur_task = {...this.state.cur_task};
-    cur_task[fieldName][id] = value;
-    console.log(fieldName);
-    console.log(cur_task[fieldName].id);
-    console.log(cur_task.breakdown.id);
+    cur_task[fieldName] = value;
     this.setState({ cur_task : cur_task});
   }
 
@@ -144,9 +135,9 @@ class App extends React.Component {
           <Route exact path = "/" render={(props) => (<EventList {...props} events={this.state.events} /> )} /> 
           <Route exact path = "/event/:id" render={(props) => (<TaskListOrganizer {...props} events={this.state.events} cur_event={this.state.cur_event} delete={this.delete} loadCurEvent={this.loadCurEvent} />)} />
           <Route exact path = "/createevent" render={(props) => (<CreateEvent {...props} eventChange={this.eventChange} />)}/>)} />
-          <Route exact path = "/add" render={(props) => (<Task {...props} taskChange={this.taskChange} cur_task={this.state.cur_task} 
+          <Route exact path = "/add" render={(props) => (<Task {...props}  taskChange={this.taskChange} cur_task={this.state.cur_task} 
           updateTask={this.updateTask} appendInput={this.appendInput} createBlank={this.createBlank} loadRecipe={this.loadRecipe} />)} />
-          <Route exact path = "/edit/:id" render={(props) => (<Task {...props} taskChange={this.taskChange} cur_task={this.state.cur_task} 
+          <Route exact path = "/edit/:id" render={(props) => (<Task {...props} loadCurTask={this.loadCurTask} taskChange={this.taskChange} cur_task={this.state.cur_task} 
           addTask={this.addTask} appendInput={this.appendInput} createBlank={this.createBlank}  updateTask={this.updateTask} loadRecipe={this.loadRecipe}  />)} />
           <Route exact path = "/volunteer" render={(props) => (<VolunteerTaskList {...props} cur_event={this.state.cur_event} /> )} /> 
         </Switch>
