@@ -8,15 +8,18 @@ or delete */
 class IndividualTask extends React.Component{
  
   render(){
+    var idx = this.props.idx;
+    console.log("individual task id:", idx);
+
     return(
       <div>
         <p>{this.props.details.name}</p>
-        <Link to={"/edit/" + this.props.id}>
+        <Link to={"/edit/" + this.props.idx}>
           <button>
             <i className="fa fa-pencil"></i>
           </button>
         </Link>
-        <button onClick={this.props.delete}>
+        <button onClick={() => this.props.delete(idx)} >
             <i className="fa fa-trash"></i>
           </button>
       </div>

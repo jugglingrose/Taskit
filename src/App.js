@@ -75,9 +75,15 @@ class App extends React.Component {
     this.setState({cur_event: cur_event});
   }
 
-  delete = (id) => {
-    console.log("delete called");
+  delete = (idx) => {
     /* here we will do a fetch to delete an existing task*/
+    console.log("delete called");
+    console.log(idx);
+    const cur_event = {...this.state.cur_event};
+    console.log(cur_event.tasks[idx]);
+    cur_event.tasks.splice(idx, 1);
+    this.setState({ cur_event : cur_event});
+    
   }
 
   createBlank = () => {
@@ -95,11 +101,14 @@ class App extends React.Component {
 
   loadCurEvent = (id) => {
     /*here we load our cur_event*/
+    console.log("load current event");
     const cur_event = {...this.state.cur_event};
     this.setState({ cur_event : this.state.events[id]});
   }
 
   loadCurTask = (id) => {
+    console.log("load current task");
+    console.log(this.state.cur_task);
     const cur_task = {...this.state.cur_task};
     this.setState({ cur_task : this.state.cur_event.tasks[id]});
   }

@@ -6,6 +6,7 @@ import Breakdown from './Breakdown';
 class Task extends React.Component {
 
   componentWillMount(){ 
+  
   }
 
   componentDidMount(){   
@@ -19,6 +20,7 @@ class Task extends React.Component {
     else{
         console.log("edit: recipe is defined. Edit task");
         this.props.loadCurTask(this.props.match.params.id);  
+     
       }
   }
 
@@ -44,6 +46,7 @@ class Task extends React.Component {
     }
 
   render(){
+    console.log('this is cur_task', this.props.cur_task);
 
     var breakdown = this.props.cur_task.breakdown || [];
     console.log("this is breakdown" , this.props.cur_task.breakdown);
