@@ -61,18 +61,19 @@ class App extends React.Component {
         location: "",
         tasks: [""],
        },
-      cur_task:{ 
-        id: "",
-        name: "",
-        desc: "",
-        breakdown: [""],
-      
-      },
+      cur_task:{ },
     }
   }
 
   addEvent = () => {
     console.log("add new event called");
+    const cur_event = {...this.state.cur_event};
+    const events = {...this.state.events};
+    console.log(events);
+    console.log(cur_event);
+    events.push(cur_event);
+    this.setState({ events : events});
+  
   }
 
   addTask = () => {
@@ -105,6 +106,7 @@ class App extends React.Component {
     
   }
 
+  /* This function will reset the data inside cur_task state to be blank*/
   createBlank = () => {
     console.log("blank recipe called");
     const blank = {
@@ -115,7 +117,7 @@ class App extends React.Component {
       number_of_openings: [ ""],
       priority: '',
     }
-    this.setState({cur_recipe: blank});
+    this.setState({cur_task: blank});
   }
 
   loadCurEvent = (id) => {
@@ -175,7 +177,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path = "/" render={(props) => (<EventList {...props} events={this.state.events} /> )} /> 
           <Route exact path = "/event/:id" render={(props) => (<TaskListOrganizer {...props} events={this.state.events} cur_event={this.state.cur_event} delete={this.delete} loadCurEvent={this.loadCurEvent} />)} />
-          <Route exact path = "/createevent" render={(props) => (<CreateEvent {...props} addEvent={this.addevent} cur_event={this.cur_event} eventChange={this.eventChange} />)}/>)} />
+          <Route exact path = "/createevent" render={(props) => (<CreateEvent {...props} addEvent={this.addEvent} cur_event={this.cur_event} eventChange={this.eventChange} />)}/>)} />
           <Route exact path = "/add" render={(props) => (<Task {...props} arrayChange={this.arrayChange} taskChange={this.taskChange} cur_task={this.state.cur_task} 
           updateTask={this.updateTask} appendInput={this.appendInput} addTask={this.addTask} createBlank={this.createBlank} loadRecipe={this.loadRecipe} />)} />
           <Route exact path = "/edit/:id" render={(props) => (<Task {...props} loadCurTask={this.loadCurTask} arrayChange={this.arrayChange} taskChange={this.taskChange} cur_task={this.state.cur_task} 

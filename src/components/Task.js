@@ -30,8 +30,9 @@ class Task extends React.Component {
       //If this is a new task, we want to create a new task
       console.log(this.props.match.params.id);
       if(id === undefined){
-         
         this.props.addTask();
+        this.props.createBlank();
+        
        }
       //If this task already exists.  We want to update that existing task.
       else{
@@ -46,6 +47,8 @@ class Task extends React.Component {
     console.log('this is cur_task', this.props.cur_task);
     var breakdown = this.props.cur_task.breakdown || [];
     console.log("this is breakdown" , this.props.cur_task.breakdown);
+    console.log("history:", this.props.history);
+    console.log("history location array", this.props.history.location);
 
     return(
       <div>
@@ -77,7 +80,7 @@ class Task extends React.Component {
         { this.props.match.params.id ? (
           <button onClick={() => {this.addEdit(this.props.match.params.id)}}>Edit</button>
         ): (
-          <button onClick={() => {this.addEdit()}}>Add</button>
+          <button onClick={() => { this.addEdit(); this.props.history.goBack(); }}>Add</button>
         )}       
   
      </div>  

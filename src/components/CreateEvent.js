@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
                   <div className="input">
                       <h2>Event Name:</h2>
                       <br />
-                      <input name="event_name" type="Name" onChange={this.props.eventChange("event_name")} />
+                      <input name="event_name" type="Name" onChange={this.props.eventChange("name")} />
                    </div>
 
                   <div className="input">
@@ -27,7 +27,9 @@ import { Link } from 'react-router-dom';
                       <input name="location" placeholder="Enter location of event." onChange={this.props.eventChange("location")} /> 
                   </div>
 
-                  <Link to="/add"><button>Add Task</button></Link>
+                  <button onClick={() => this.props.history.push("/add")} >Add Task </button>
+
+                
               </div>
               { this.props.match.params.id ?
                  (<button>Edit</button>)
