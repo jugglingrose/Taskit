@@ -37,9 +37,9 @@ class Task extends React.Component {
       //If this task already exists.  We want to update that existing task.
       else{
         console.log("task is calling update task");
-        this.props.updateTask(id, () => { 
-          
+        this.props.updateTask(id, () => {   
         });
+        this.props.history.goBack();
       }
     }
 

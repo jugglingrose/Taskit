@@ -57,9 +57,9 @@ class App extends React.Component {
       cur_event: {
         id: "",
         name: "",
-        data: "",
+        date: "",
         location: "",
-        tasks: [""],
+        tasks: [],
        },
       cur_task:{ },
     }
@@ -68,7 +68,7 @@ class App extends React.Component {
   addEvent = () => {
     console.log("add new event called");
     const cur_event = {...this.state.cur_event};
-    const events = {...this.state.events};
+    const events = [...this.state.events];
     console.log(events);
     console.log(cur_event);
     events.push(cur_event);
@@ -177,7 +177,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path = "/" render={(props) => (<EventList {...props} events={this.state.events} /> )} /> 
           <Route exact path = "/event/:id" render={(props) => (<TaskListOrganizer {...props} events={this.state.events} cur_event={this.state.cur_event} delete={this.delete} loadCurEvent={this.loadCurEvent} />)} />
-          <Route exact path = "/createevent" render={(props) => (<CreateEvent {...props} addEvent={this.addEvent} cur_event={this.cur_event} eventChange={this.eventChange} />)}/>)} />
+          <Route exact path = "/createevent" render={(props) => (<CreateEvent {...props} addEvent={this.addEvent} cur_event={this.state.cur_event} eventChange={this.eventChange} />)}/>)} />
           <Route exact path = "/add" render={(props) => (<Task {...props} arrayChange={this.arrayChange} taskChange={this.taskChange} cur_task={this.state.cur_task} 
           updateTask={this.updateTask} appendInput={this.appendInput} addTask={this.addTask} createBlank={this.createBlank} loadRecipe={this.loadRecipe} />)} />
           <Route exact path = "/edit/:id" render={(props) => (<Task {...props} loadCurTask={this.loadCurTask} arrayChange={this.arrayChange} taskChange={this.taskChange} cur_task={this.state.cur_task} 
