@@ -5,9 +5,6 @@ import Breakdown from './Breakdown';
 
 class Task extends React.Component {
 
-  componentWillMount(){ 
-  }
-
   componentDidMount(){   
     /* we want to gather the id from our url param to use this to ensure we edit only the selected task*/
     var id = this.props.match.params.id;
@@ -37,8 +34,9 @@ class Task extends React.Component {
       //If this task already exists.  We want to update that existing task.
       else{
         console.log("task is calling update task");
-        this.props.updateTask(id, () => {   
-        });
+        /*this.props.updateTask(id, () => {   
+        });*/
+        this.props.updateTask(id);
         this.props.history.goBack();
       }
     }

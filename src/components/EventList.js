@@ -12,7 +12,7 @@ class EventList extends React.Component {
         {/* We use .map() to render an IndividualEvent Component for each of the events.  Events are stored
         inside our events state, which resides in App.js */}
         {
-          events.map((event, id) => <IndividualEvent key={id} id={id} details={this.props.events[id]} /> )
+          events.map((event, id) => <IndividualEvent key={id} id={id} details={this.props.events[id]} deleteEvent={this.props.deleteEvent} /> )
         }
           
       </div>

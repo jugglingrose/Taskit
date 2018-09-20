@@ -1,13 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import IndividualTask from './IndividualTask';
 
   
  class CreateEvent extends React.Component {
+
+        /*Once the component is mounted, we want to see if a parameter was passed in the url/:id.*/
+        componentDidMount(){
+            var id = this.props.match.params.id;
+            /*If no id, we are creating a new event*/
+            if(id===undefined){
+               this.props.createBlankEvent();
+            /*If an id exists, this is an existing event.  We need to use the id to load the matching event into our cur_event state*/
+            }else{
+                this.props.loadCurEvent(id);
+            }  
+        }    
       
         render(){
-            console.log("current event" , this.props.cur_event);
-            const tasks = this.props.cur_event.tasks;
+
+        const tasks = this.props.cur_event.tasks;
           return(
             <div className="content-window">
               <div className="add-event">
@@ -43,17 +54,11 @@ import IndividualTask from './IndividualTask';
                   </div>
                   <div>
                   { this.props.match.params.id ?
-                 (<button>Edit</button>)
-                 : (<button onClick={() => { this.props.addEvent() ; this.props.history.push("/"); }}>Save Event</button>)
-              }
-                  </div>
-
-                
-
-                
-              </div>
-              
-              
+                    (<button onClick={() => {this.props.updateEvent(this.props.match.params.id); this.props.history.push("/"); }}>Edit</button>)
+                    : (<button onClick={() => { this.props.addEvent() ; this.props.history.push("/"); }}>Save Event</button>)
+                  }
+                  </div>      
+              </div>       
         </div>
         
         )

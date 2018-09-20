@@ -65,19 +65,50 @@ class App extends React.Component {
     }
   }
 
+  /*Events*/
+  loadCurEvent = (id) => {
+    /*Loads cur_event*/
+    console.log("load current event");
+    const cur_event = {...this.state.cur_event};
+    this.setState({ cur_event : this.state.events[id]});
+  }
+
   addEvent = () => {
     console.log("add new event called");
     const cur_event = {...this.state.cur_event};
     const events = [...this.state.events];
-    console.log(events);
-    console.log(cur_event);
     events.push(cur_event);
     this.setState({ events : events});
   
   }
 
+  updateEvent = (id) => {
+    console.log("update event called", id);
+    const cur_event = {...this.state.cur_event}
+    const events = [...this.state.events];
+    events[id] = cur_event;
+    this.setState({events: events});
+  }
+
+  createBlankEvent = () => {
+    const blank = {
+      id: "",
+      name: "",
+      date: "",
+      location: "",
+      tasks: [],
+    }
+    this.setState({cur_event: blank});
+  }
+
+  deleteEvent = () => {
+    console.log("delete event");
+  }
+
+  /*Tasks*/
+
   addTask = () => {
-    console.log("add task called"); 
+      console.log("add task called"); 
       const cur_event = {...this.state.cur_event};
       const cur_task = {...this.state.cur_task};
       cur_event.tasks.push(cur_task);
@@ -87,8 +118,6 @@ class App extends React.Component {
   updateTask = (id) => {
     /* here we will do a fetch to update an existing task*/
     console.log("update task called", id);
-    console.log(this.state.cur_task);
-    console.log(this.state.cur_event);
     const cur_task = {...this.state.cur_task};
     const cur_event = {...this.state.cur_event};
     cur_event.tasks[id] = cur_task;
@@ -97,18 +126,14 @@ class App extends React.Component {
 
   delete = (idx) => {
     /* here we will do a fetch to delete an existing task*/
-    console.log("delete called");
-    console.log(idx);
     const cur_event = {...this.state.cur_event};
     console.log(cur_event.tasks[idx]);
     cur_event.tasks.splice(idx, 1);
-    this.setState({ cur_event : cur_event});
-    
+    this.setState({ cur_event : cur_event});   
   }
 
   /* This function will reset the data inside cur_task state to be blank*/
   createBlank = () => {
-    console.log("blank recipe called");
     const blank = {
       id: '',
       name: '',
@@ -120,16 +145,8 @@ class App extends React.Component {
     this.setState({cur_task: blank});
   }
 
-  loadCurEvent = (id) => {
-    /*here we load our cur_event*/
-    console.log("load current event");
-    const cur_event = {...this.state.cur_event};
-    this.setState({ cur_event : this.state.events[id]});
-  }
-
   loadCurTask = (id) => {
-    console.log("load current task");
-    console.log(this.state.cur_task);
+    /*Load cur_task */
     const cur_task = {...this.state.cur_task};
     this.setState({ cur_task : this.state.cur_event.tasks[id]});
   }
@@ -139,12 +156,21 @@ class App extends React.Component {
     /* here we do a fetch to set our cur_task based on the id we receive*/
   }
 
+  /* Input Fields */
+
+  /* pushes a blank string to our cur_task[fieldname] array. */
   appendInput = (fieldname) => {
-    console.log('append input called');
     const cur_task = {...this.state.cur_task};
     const newInput = [""];
     const InputArray = cur_task[fieldname].concat(newInput);
     cur_task[fieldname] = InputArray;
+    this.setState({cur_task : cur_task});
+  }
+
+  arrayChange = (fieldName, id) => (e) => {
+    const value = e.target.value;
+    const cur_task = {...this.state.cur_task};
+    cur_task[fieldName][id] = value;
     this.setState({cur_task : cur_task});
   }
 
@@ -162,26 +188,21 @@ class App extends React.Component {
     this.setState({ cur_task : cur_task});
   }
 
-    arrayChange = (fieldName, id) => (e) => {
-      console.log('array change');
-      const value = e.target.value;
-      const cur_task = {...this.state.cur_task};
-      cur_task[fieldName][id] = value;
-      this.setState({cur_task : cur_task});
-    }
+
   render() {
     return (
       <div>
         <Nav/>
         <Sidebar/>
         <Switch>
-          <Route exact path = "/" render={(props) => (<EventList {...props} events={this.state.events} /> )} /> 
+          <Route exact path = "/" render={(props) => (<EventList {...props} events={this.state.events} deleteEvent={this.deleteEvent}/> )} /> 
           <Route exact path = "/event/:id" render={(props) => (<TaskListOrganizer {...props} events={this.state.events} cur_event={this.state.cur_event} delete={this.delete} loadCurEvent={this.loadCurEvent} />)} />
-          <Route exact path = "/createevent" render={(props) => (<CreateEvent {...props} addEvent={this.addEvent} cur_event={this.state.cur_event} eventChange={this.eventChange} />)}/>)} />
+          <Route exact path = "/createevent" render={(props) => (<CreateEvent {...props} createBlankEvent={this.createBlankEvent} addEvent={this.addEvent} cur_event={this.state.cur_event} eventChange={this.eventChange} />)}/>)} />
+          <Route exact path = "/editevent/:id" render={(props) => (<CreateEvent {...props}  loadCurEvent={this.loadCurEvent} updateEvent={this.updateEvent} cur_event={this.state.cur_event} eventChange = {this.eventChange} /> )} />
           <Route exact path = "/add" render={(props) => (<Task {...props} arrayChange={this.arrayChange} taskChange={this.taskChange} cur_task={this.state.cur_task} 
-          updateTask={this.updateTask} appendInput={this.appendInput} addTask={this.addTask} createBlank={this.createBlank} loadRecipe={this.loadRecipe} />)} />
+          updateTask={this.updateTask} appendInput={this.appendInput} addTask={this.addTask} createBlank={this.createBlank} />)} />
           <Route exact path = "/edit/:id" render={(props) => (<Task {...props} loadCurTask={this.loadCurTask} arrayChange={this.arrayChange} taskChange={this.taskChange} cur_task={this.state.cur_task} 
-          addTask={this.addTask} appendInput={this.appendInput} createBlank={this.createBlank}  updateTask={this.updateTask} loadRecipe={this.loadRecipe} cur_event={this.state.cur_event} />)} />
+          addTask={this.addTask} appendInput={this.appendInput} createBlank={this.createBlank}  updateTask={this.updateTask}  cur_event={this.state.cur_event} />)} />
           <Route exact path = "/volunteer" render={(props) => (<VolunteerTaskList {...props} cur_event={this.state.cur_event} /> )} /> 
         </Switch>
       </div>
