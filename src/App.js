@@ -54,18 +54,33 @@ class App extends React.Component {
           priority: "urgent"}],
         }  
       ],
-      cur_event: { },
-      cur_task:{ },
+      cur_event: {
+        id: "",
+        name: "",
+        data: "",
+        location: "",
+        tasks: [""],
+       },
+      cur_task:{ 
+        id: "",
+        name: "",
+        desc: "",
+        breakdown: [""],
+      
+      },
     }
   }
 
+  addEvent = () => {
+    console.log("add new event called");
+  }
+
   addTask = () => {
-    console.log("add task called");
-    const cur_event = {...this.state.cur_event};
-    const cur_task = {...this.state.cur_task};
-    cur_event.tasks.push(cur_task);
-    this.setState({cur_event : cur_event});
-    /* here we will do a fetch to add a new task */
+    console.log("add task called"); 
+      const cur_event = {...this.state.cur_event};
+      const cur_task = {...this.state.cur_task};
+      cur_event.tasks.push(cur_task);
+      this.setState({cur_event : cur_event});
   }
 
   updateTask = (id) => {
@@ -160,8 +175,8 @@ class App extends React.Component {
         <Switch>
           <Route exact path = "/" render={(props) => (<EventList {...props} events={this.state.events} /> )} /> 
           <Route exact path = "/event/:id" render={(props) => (<TaskListOrganizer {...props} events={this.state.events} cur_event={this.state.cur_event} delete={this.delete} loadCurEvent={this.loadCurEvent} />)} />
-          <Route exact path = "/createevent" render={(props) => (<CreateEvent {...props} eventChange={this.eventChange} />)}/>)} />
-          <Route exact path = "/add" render={(props) => (<Task {...props}  taskChange={this.taskChange} cur_task={this.state.cur_task} 
+          <Route exact path = "/createevent" render={(props) => (<CreateEvent {...props} addEvent={this.addevent} cur_event={this.cur_event} eventChange={this.eventChange} />)}/>)} />
+          <Route exact path = "/add" render={(props) => (<Task {...props} arrayChange={this.arrayChange} taskChange={this.taskChange} cur_task={this.state.cur_task} 
           updateTask={this.updateTask} appendInput={this.appendInput} addTask={this.addTask} createBlank={this.createBlank} loadRecipe={this.loadRecipe} />)} />
           <Route exact path = "/edit/:id" render={(props) => (<Task {...props} loadCurTask={this.loadCurTask} arrayChange={this.arrayChange} taskChange={this.taskChange} cur_task={this.state.cur_task} 
           addTask={this.addTask} appendInput={this.appendInput} createBlank={this.createBlank}  updateTask={this.updateTask} loadRecipe={this.loadRecipe} cur_event={this.state.cur_event} />)} />

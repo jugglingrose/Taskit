@@ -18,6 +18,7 @@ class Breakdown extends React.Component{
   render() {
     /* Render out each individual breakdown items as it's own input field */
     console.log(this.props.id);
+    console.log(this.props.breakdown);
     return(
       <div>
         <input value={this.props.breakdown} onKeyDown={this.keyPress} onChange={this.props.arrayChange("breakdown", this.props.id)}></input>

@@ -44,7 +44,6 @@ class Task extends React.Component {
 
   render(){
     console.log('this is cur_task', this.props.cur_task);
-
     var breakdown = this.props.cur_task.breakdown || [];
     console.log("this is breakdown" , this.props.cur_task.breakdown);
 

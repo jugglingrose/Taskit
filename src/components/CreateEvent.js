@@ -1,8 +1,9 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
   
  class CreateEvent extends React.Component {
+      
         render(){
           return(
             <div className="content-window">
@@ -26,10 +27,13 @@ import React from 'react';
                       <input name="location" placeholder="Enter location of event." onChange={this.props.eventChange("location")} /> 
                   </div>
 
-                  <div className="button">
-                      <h2>Add task to your event</h2>
-                  </div>
+                  <Link to="/add"><button>Add Task</button></Link>
               </div>
+              { this.props.match.params.id ?
+                 (<button>Edit</button>)
+                 : (<button onClick={() => this.props.addEvent()}>Add</button>)
+              }
+              
         </div>
         
         )
