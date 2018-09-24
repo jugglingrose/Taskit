@@ -19,7 +19,7 @@ Laurie Hansson (Backend), and Kristin Taylor (UX/UI).  It is currently an ongoin
 
 ## Additional Notes
 
-This repo contains the React code developed by Corean Gonzales
+This repo contains the React code for the Organizer UI, developed by Corean Gonzales
 
 
 
