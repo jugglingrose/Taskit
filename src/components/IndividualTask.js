@@ -13,7 +13,8 @@ class IndividualTask extends React.Component{
 
     return(
       <div>
-        <p>{this.props.details.name}</p>
+        <Link to={"/viewtask/" + this.props.idx}><p>{this.props.details.name}</p></Link>
+        
         <Link to={"/edit/" + this.props.idx}>
           <button>
             <i className="fa fa-pencil"></i>

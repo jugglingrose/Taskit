@@ -9,6 +9,7 @@ import Task from './components/Task';
 import TaskListOrganizer from './components/TaskListOrganizer';
 import VolunteerTaskList from './components/VolunteerTaskList';
 import EventList from './components/EventList';
+import ViewTask from './components/ViewTask';
 
 
 class App extends React.Component {
@@ -19,20 +20,20 @@ class App extends React.Component {
       events: [
         {
           id: "eventOne",
-          name: "First Event",
+          name: "Animal Shelter Fundraiser",
           date: "October",
           location: "Austin",
           tasks: [{id: "foo",
-          name: "set up the booth",
-          desc: "set up booth",
-          breakdown: ["set up table", "place a cover", "2 chairs"],
+          name: "Guest Greeter",
+          desc: "Set up sign in booth and greet guests ",
+          breakdown: ["set up table", "greet guests", "hand out name tags"],
           number_of_openings: 3 ,
           priority: "important"}, 
           {id: "bar",
-          name: "sweep the floor",
-          desc: "sweep the stadium",
-          breakdown: ["sweep", "put away broom"],
-          number_of_openings: 3 ,
+          name: "Catering",
+          desc: "set up food and drinks for the event",
+          breakdown: ["set up beverage station", "assemble dessert table"],
+          number_of_openings: 2 ,
           priority: "urgent"}],
         },
         {
@@ -101,8 +102,11 @@ class App extends React.Component {
     this.setState({cur_event: blank});
   }
 
-  deleteEvent = () => {
+  deleteEvent = (id) => {
     console.log("delete event");
+    const events = [...this.state.events];
+    events.splice(id, 1);
+    this.setState({ events : events});
   }
 
   /*Tasks*/
@@ -198,7 +202,8 @@ class App extends React.Component {
           <Route exact path = "/" render={(props) => (<EventList {...props} events={this.state.events} deleteEvent={this.deleteEvent}/> )} /> 
           <Route exact path = "/event/:id" render={(props) => (<TaskListOrganizer {...props} events={this.state.events} cur_event={this.state.cur_event} delete={this.delete} loadCurEvent={this.loadCurEvent} />)} />
           <Route exact path = "/createevent" render={(props) => (<CreateEvent {...props} createBlankEvent={this.createBlankEvent} addEvent={this.addEvent} cur_event={this.state.cur_event} eventChange={this.eventChange} />)}/>)} />
-          <Route exact path = "/editevent/:id" render={(props) => (<CreateEvent {...props}  loadCurEvent={this.loadCurEvent} updateEvent={this.updateEvent} cur_event={this.state.cur_event} eventChange = {this.eventChange} /> )} />
+          <Route exact path = "/editevent/:id" render={(props) => (<CreateEvent {...props} loadCurEvent={this.loadCurEvent} updateEvent={this.updateEvent} cur_event={this.state.cur_event} eventChange = {this.eventChange} /> )} />
+          <Route exact path = "/viewtask/:id" render={(props) => <ViewTask {...props} cur_task={this.state.cur_task} loadCurTask={this.loadCurTask}  /> } />
           <Route exact path = "/add" render={(props) => (<Task {...props} arrayChange={this.arrayChange} taskChange={this.taskChange} cur_task={this.state.cur_task} 
           updateTask={this.updateTask} appendInput={this.appendInput} addTask={this.addTask} createBlank={this.createBlank} />)} />
           <Route exact path = "/edit/:id" render={(props) => (<Task {...props} loadCurTask={this.loadCurTask} arrayChange={this.arrayChange} taskChange={this.taskChange} cur_task={this.state.cur_task} 

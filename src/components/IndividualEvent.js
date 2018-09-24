@@ -7,14 +7,14 @@ plus edit/delete/view the tasks associated with that event.*/
 class IndividualEvent extends React.Component{
 
   render() {
-    console.log(this.props.id);
+    console.log("event id", this.props.id);
     return(
       <div>
         <Link to={"/event/" + this.props.id }>
           <p>{this.props.details.name}</p>
         </Link>
         <Link to={"/editevent/" + this.props.id }><button><i class="fa fa-pencil"></i></button></Link>
-        <button onClick={() => this.props.deleteEvent()}><i class="fa fa-trash"></i></button>
+        <button onClick={() => this.props.deleteEvent(this.props.id)}><i class="fa fa-trash"></i></button>
       </div>
     )
   }

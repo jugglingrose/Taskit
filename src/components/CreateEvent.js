@@ -25,19 +25,19 @@ import IndividualTask from './IndividualTask';
                  
                   <div className="input">
                       <h2>Event Name:</h2>
-                      <br />
+                     
                       <input value={this.props.cur_event.name} name="event_name" type="Name" onChange={this.props.eventChange("name")} />
                    </div>
 
                   <div className="input">
                       <h2 className="yourMom">Event Date:</h2>
-                      <br />
+              
                       <input value={this.props.cur_event.date} name="date" placeholder="mm/dd/yy" type="date" onChange={this.props.eventChange("date")} />
                   </div>
 
                   <div className="input">
                       <h2 className="yourMom">Location:</h2>
-                      <br />
+                  
                       <input value={this.props.cur_event.location} name="location" placeholder="Enter location of event." onChange={this.props.eventChange("location")} /> 
                   </div>
                   <div className="input">
