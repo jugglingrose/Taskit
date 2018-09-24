@@ -2,7 +2,7 @@
 
 ## What is Taskit?
 
-Web Application for event organizers to delegate tasks to volunteers
+Web Application for event organizers to create events and delegate tasks to volunteers
 
 ## Why use Taskit?
 
