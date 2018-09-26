@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 /* This component displays the selected task */
 class ViewTask extends React.Component{
@@ -15,12 +16,15 @@ class ViewTask extends React.Component{
         <h3>Description:</h3>
         <p>{this.props.cur_task.desc}</p> 
         <p><b>Number Of Openings:</b> {this.props.cur_task.number_of_openings}</p>
-    
         <p><b>Priority:</b> {this.props.cur_task.priority}</p>
-      
       </div>
     )
   }
+}
+
+ViewTask.propTypes = {
+  cur_task: PropTypes.object,
+  loadCurTask: PropTypes.func,
 }
 
 export default ViewTask;

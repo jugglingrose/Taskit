@@ -1,7 +1,6 @@
 import React from 'react';
 
 /* Nav component */
-
 class Nav extends React.Component {
   render(){
     return(

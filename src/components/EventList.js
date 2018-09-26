@@ -1,5 +1,6 @@
 import React from 'react';
 import IndividualEvent from './IndividualEvent';
+import PropTypes from 'prop-types';
 
 /* The event list will display all of our current events.  From here, the organizer can select an event to view*/
 class EventList extends React.Component {
@@ -13,12 +14,15 @@ class EventList extends React.Component {
         inside our events state, which resides in App.js */}
         {
           events.map((event, id) => <IndividualEvent key={id} id={id} details={this.props.events[id]} deleteEvent={this.props.deleteEvent} /> )
-        }
-          
-      </div>
-      
+        }          
+      </div>     
     )
   }
+}
+
+EventList.propTypes = {
+  events: PropTypes.array,
+  deleteEvent: PropTypes.func,
 }
 
 export default EventList;

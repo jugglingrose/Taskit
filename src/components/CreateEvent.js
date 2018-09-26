@@ -1,9 +1,9 @@
 import React from 'react';
 import IndividualTask from './IndividualTask';
+import PropTypes from 'prop-types';
 
   
  class CreateEvent extends React.Component {
-
         /*Once the component is mounted, we want to see if a parameter was passed in the url/:id.*/
         componentDidMount(){
             var id = this.props.match.params.id;
@@ -17,15 +17,12 @@ import IndividualTask from './IndividualTask';
         }    
       
         render(){
-
         const tasks = this.props.cur_event.tasks;
           return(
             <div className="content-window">
-              <div className="add-event">
-                 
+              <div className="add-event">    
                   <div className="input">
                       <h2>Event Name:</h2>
-                     
                       <input value={this.props.cur_event.name} name="event_name" type="Name" onChange={this.props.eventChange("name")} />
                    </div>
 
@@ -59,10 +56,17 @@ import IndividualTask from './IndividualTask';
                   }
                   </div>      
               </div>       
-        </div>
-        
+        </div>       
         )
       }
    }
+
+CreateEvent.propTypes = {
+    addEvent: PropTypes.func,
+    updateEvent: PropTypes.func,
+    cur_event: PropTypes.object,
+    createBlankEvent: PropTypes.func,
+    loadCurEvent: PropTypes.func,
+}
 
 export default CreateEvent;

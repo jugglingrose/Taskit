@@ -1,20 +1,19 @@
 import React from 'react';
 import Breakdown from './Breakdown';
+import PropTypes from 'prop-types';
 
 /*This component is where the organizer will add/edit tasks.*/
-
 class Task extends React.Component {
 
   componentDidMount(){   
     /* we want to gather the id from our url param to use this to ensure we edit only the selected task*/
     var id = this.props.match.params.id;
-
+    /* if id is undefined, we want a blank form*/
     if(id === undefined){
-      console.log("recipe is undefined.  Add Task");
       this.props.createBlank();
     }
+    /*else if id is defined, we want to load the corresponding task and pre fill our form with the task information*/
     else{
-        console.log("edit: recipe is defined. Edit task");
         this.props.loadCurTask(this.props.match.params.id);  
       }
   }
@@ -25,7 +24,6 @@ class Task extends React.Component {
     it means the task does not exist, so we want to implement the functionality for adding a new task*/
     addEdit(id){
       //If this is a new task, we want to create a new task
-      console.log(this.props.match.params.id);
       if(id === undefined){
         this.props.addTask();
         this.props.createBlank();
@@ -33,21 +31,13 @@ class Task extends React.Component {
        }
       //If this task already exists.  We want to update that existing task.
       else{
-        console.log("task is calling update task");
-        /*this.props.updateTask(id, () => {   
-        });*/
         this.props.updateTask(id);
         this.props.history.goBack();
       }
     }
 
   render(){
-    console.log('this is cur_task', this.props.cur_task);
     var breakdown = this.props.cur_task.breakdown || [];
-    console.log("this is breakdown" , this.props.cur_task.breakdown);
-    console.log("history:", this.props.history);
-    console.log("history location array", this.props.history.location);
-
     return(
       <div>
         <br/>
@@ -65,7 +55,6 @@ class Task extends React.Component {
           breakdown.map((item, idx) =>
           <Breakdown breakdown={item} key={idx} id={idx} arrayChange={this.props.arrayChange} task={this.props.cur_task} appendInput={this.props.appendInput}/> , this)
         }
-      
         <br/>
         # of Openings:
         <br/>
@@ -80,11 +69,20 @@ class Task extends React.Component {
         ): (
           <button onClick={() => { this.addEdit(); this.props.history.goBack(); }}>Add</button>
         )}       
-  
      </div>  
-
     )
   }
+}
+
+Task.propTypes = {
+  cur_task: PropTypes.object,
+  taskChange: PropTypes.func,
+  appendInput: PropTypes.func,
+  arrayChange: PropTypes.func,
+  updateTask: PropTypes.func,
+  addTask: PropTypes.func,
+  createBlank: PropTypes.func,
+  loadCurTask: PropTypes.func, 
 }
 
 export default Task;

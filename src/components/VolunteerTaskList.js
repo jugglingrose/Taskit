@@ -1,5 +1,6 @@
 import React from "react";
 import VolunteerTask from "./VolunteerTask";
+import PropTypes from 'prop-types';
 
 class VolunteerTaskList extends React.Component{
   render(){
@@ -13,6 +14,10 @@ class VolunteerTaskList extends React.Component{
       </div>
     )
   }
+}
+
+VolunteerTaskList.propTypes = {
+  cur_event: PropTypes.object,
 }
 
 export default VolunteerTaskList;

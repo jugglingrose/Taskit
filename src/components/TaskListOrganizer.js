@@ -1,6 +1,7 @@
 import React from 'react';
 import IndividualTask from './IndividualTask';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 /* This component is where the Organizer can view the event details and manage the tasks
 associated with the event. */
@@ -11,8 +12,7 @@ class TaskListOrganizer extends React.Component {
     this.props.loadCurEvent(this.props.match.params.id);
   }
 
-  render(){
-    
+  render(){  
     var id = this.props.match.params.id;
     var tasks = this.props.events[id].tasks;
     return(
@@ -31,6 +31,12 @@ class TaskListOrganizer extends React.Component {
       </div>   
     )
   }
+}
+
+TaskListOrganizer.propTypes = {
+  events: PropTypes.array,
+  delete: PropTypes.func,
+  loadCurEvent: PropTypes.func,
 }
 
 export default TaskListOrganizer;
