@@ -12,8 +12,8 @@ class IndividualEvent extends React.Component{
         <Link to={"/event/" + this.props.id }>
           <p>{this.props.details.name}</p>
         </Link>
-        <Link to={"/editevent/" + this.props.id }><button><i class="fa fa-pencil"></i></button></Link>
-        <button onClick={() => this.props.deleteEvent(this.props.id)}><i class="fa fa-trash"></i></button>
+        <Link to={"/editevent/" + this.props.id }><button><i className="fa fa-pencil"></i></button></Link>
+        <button onClick={() => this.props.deleteEvent(this.props.id)}><i className="fa fa-trash"></i></button>
       </div>
     )
   }

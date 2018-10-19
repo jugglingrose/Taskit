@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-/* This component displays the selected task */
+/* This component displays the details of the selected task */
 class ViewTask extends React.Component{
   
   componentDidMount(){
@@ -10,11 +10,12 @@ class ViewTask extends React.Component{
   }
 
   render(){  
+    const breakdowns = this.props.cur_task.breakdown;
     return(
       <div>
         <h1>{this.props.cur_task.name}</h1>
         <h3>Description:</h3>
-        <p>{this.props.cur_task.desc}</p> 
+        <p>{this.props.cur_task.desc}</p>  
         <p><b>Number Of Openings:</b> {this.props.cur_task.number_of_openings}</p>
         <p><b>Priority:</b> {this.props.cur_task.priority}</p>
       </div>
@@ -25,6 +26,7 @@ class ViewTask extends React.Component{
 ViewTask.propTypes = {
   cur_task: PropTypes.object,
   loadCurTask: PropTypes.func,
+  
 }
 
 export default ViewTask;

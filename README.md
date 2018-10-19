@@ -1,4 +1,5 @@
 # Taskit
+You can visit the app @ https://jugglingrose.github.io/Taskit/
 
 ## What is Taskit?
 
@@ -19,7 +20,7 @@ Laurie Hansson (Backend), and Kristin Taylor (UX/UI).  It is currently an ongoin
 
 ## Additional Notes
 
-This repo contains the React code for the Organizer UI, developed by Corean Gonzales
+This repo contains the React code for the Organizer UI, developed by Corean Gonzales.  You can visit the app @ https://jugglingrose.github.io/Taskit/
 
 
 

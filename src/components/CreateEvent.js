@@ -39,19 +39,20 @@ import PropTypes from 'prop-types';
                   </div>
                   <div className="input">
                     <h2 className="yourMom">Tasks:</h2>
-                      <br />
-
+            
                   {
                       tasks.map((task, idx) => 
                           <IndividualTask idx={idx} key={idx} details={this.props.cur_event.tasks[idx]} />
                       )
                   }
-
+                  <br/>
                   <button onClick={() => this.props.history.push("/add")} >Add Task </button>
+                  <br/>
+                  <br/>
                   </div>
                   <div>
                   { this.props.match.params.id ?
-                    (<button onClick={() => {this.props.updateEvent(this.props.match.params.id); this.props.history.push("/"); }}>Edit</button>)
+                    (<button onClick={() => {this.props.updateEvent(this.props.match.params.id); this.props.history.push("/"); }}>Edit Event</button>)
                     : (<button onClick={() => { this.props.addEvent() ; this.props.history.push("/"); }}>Save Event</button>)
                   }
                   </div>      

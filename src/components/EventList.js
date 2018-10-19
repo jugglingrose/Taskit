@@ -9,7 +9,7 @@ class EventList extends React.Component {
     return(
       <div>
         <h1>Organization Name</h1>
-        <h2>Event List</h2>
+        <h2>List Of Events:</h2>
         {/* We use .map() to render an IndividualEvent Component for each of the events.  Events are stored
         inside our events state, which resides in App.js */}
         {

@@ -29,7 +29,6 @@ class Sidebar extends React.Component{
             </div>
         </div>
       <div className="content-window">
-
     </div>
     </div>
     )
